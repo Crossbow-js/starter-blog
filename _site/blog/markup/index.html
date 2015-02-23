@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Markup</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body>
+    <header class="container">
+        <h1>Markup</h1>
+    </header>
+    <main>
+        <div class="container">
+            <p>Crossbow can create truly beautiful markup. Just view source on this page, you&#39;ll see exactly
+            what we mean!</p>
+<pre><code class="lang-hbs"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
+        </span><span class="hljs-expression">{{<span class="hljs-variable">inc</span> <span class="hljs-variable">src</span>=<span class="hljs-string">"someinclude.html"</span>}}</span><span class="xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">main</span>&gt;</span></span>
+</code></pre>
+            <p>... turns into:  </p>
+<pre><code class="lang-hbs"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">main</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Look, Indentation is preserved<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">main</span>&gt;</span></span>
+</code></pre>
+
+        </div>
+    </main>
+</body>
+</html>

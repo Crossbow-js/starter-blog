@@ -5,8 +5,10 @@ var sass         = require("gulp-sass");
 var rimraf       = require("rimraf");
 var htmlInjector = require("bs-html-injector");
 var outdir       = "_site";
-var norma        = require.resolve("normalize.css/normalize.css");
 
+/**
+ * Create a Crossbow Builder
+ */
 var site         = crossbow.builder({
     config: {
         base: "_src",
@@ -35,10 +37,16 @@ gulp.task("serve", function () {
         }
     }, function (err, bs) {
         site.logger.info("View your website at: {yellow:%s}", bs.getOptionIn(["urls", "local"]));
-        site.logger.info("View your website at: {yellow:%s}", bs.getOptionIn(["urls", "external"]));
+        if (bs.getOptionIn(["urls", "external"])) {
+            site.logger.info("View your website at: {yellow:%s}", bs.getOptionIn(["urls", "external"]));
+        }
     });
 });
 
+/**
+ * Build the Crossbow site.
+ * @returns {*}
+ */
 function buildSite() {
     return gulp.src([
         "_src/index.html",
@@ -48,11 +56,17 @@ function buildSite() {
         .pipe(gulp.dest("_site"));
 }
 
+process.stdin.on("data", function (buf) {
+    if (buf.toString() === "cb" + require("os").EOL) {
+        buildSite().on("end", browserSync.reload);
+    }
+});
+
 /**
  * Default task
  */
 gulp.task("crossbow", function () {
-    buildSite();
+    return buildSite();
 });
 
 gulp.task("watch", function () {
@@ -77,17 +91,6 @@ gulp.task("watch", function () {
 gulp.task("sass", function () {
     return gulp.src("scss/main.scss")
         .pipe(sass())
-        .pipe(require("through2").obj(function (file, enc, next) {
-            var modded = file.contents.toString().replace(/@import url\(\.\.\/(.+?)\);/g, function () {
-                var filepath = require("path").resolve((arguments[1]));
-                if (require("fs").existsSync(filepath)) {
-                    return require("fs").readFileSync(filepath);
-                }
-            });
-            file.contents = new Buffer(modded);
-            this.push(file);
-            next();
-        }))
         .pipe(gulp.dest("./css"))
         .pipe(browserSync.reload({stream: true}))
 });

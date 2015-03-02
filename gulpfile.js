@@ -26,7 +26,7 @@ var site         = crossbow.builder({
 gulp.task("serve", function () {
     browserSync.use(htmlInjector);
     browserSync({
-        open: false,
+        open: true,
         logLevel: "silent",
         server: {
             baseDir: outdir,

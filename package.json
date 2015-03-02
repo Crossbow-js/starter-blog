@@ -11,7 +11,7 @@
   "devDependencies": {
     "browser-sync": "^2.2.1",
     "bs-html-injector": "^1.2.1",
-    "crossbow": "^0.4.0",
+    "crossbow": "^0.4.1",
     "gulp": "^3.8.11",
     "gulp-sass": "^1.3.3",
     "normalize.css": "^3.0.2",

@@ -24,10 +24,12 @@ var site         = crossbow.builder({
  * Start BrowserSync
  */
 gulp.task("serve", function () {
-    browserSync.use(htmlInjector);
     browserSync({
         open: true,
         logLevel: "silent",
+        plugins: [{
+            "bs-html-injector": {}
+        }],
         server: {
             baseDir: outdir,
             routes: {
